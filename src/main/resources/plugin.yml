@@ -1,0 +1,12 @@
+name: FakeSnow
+version: ${project.version}
+main: me.rerere.fakesnow.FakeSnow
+api-version: 1.13
+depend: [ ProtocolLib ]
+authors: [ RE ]
+description: Fake snow state
+commands:
+  fakesnow:
+    description: Command of FakeSnow plugin
+    aliases:
+      - fsnow
