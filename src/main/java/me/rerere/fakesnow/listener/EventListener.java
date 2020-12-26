@@ -12,10 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -26,6 +23,33 @@ public class EventListener implements Listener {
         SnowController snowController = FakeSnow.getInstance().getSnowController();
         if(snowController.shouldForceSnow(event.getPlayer())){
             event.getPlayer().setPlayerWeather(WeatherType.DOWNFALL);
+        }
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent event){
+        SnowController snowController = FakeSnow.getInstance().getSnowController();
+        if(snowController.shouldForceSnow(event.getPlayer(), event.getRespawnLocation())){
+            event.getPlayer().setPlayerWeather(WeatherType.DOWNFALL);
+        }
+    }
+
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent event){
+        if(event.getTo() == null){
+            return;
+        }
+        Player player = event.getPlayer();
+        Location from = event.getFrom();
+        Location to = event.getTo();
+        SnowController snowController = FakeSnow.getInstance().getSnowController();
+        boolean fromShould = snowController.shouldForceSnow(player, from);
+        boolean toShould = snowController.shouldForceSnow(player, to);
+        if(fromShould && !toShould){
+            player.setPlayerWeather(WeatherType.CLEAR);
+        }
+        if(!fromShould && toShould){
+            player.setPlayerWeather(WeatherType.DOWNFALL);
         }
     }
 

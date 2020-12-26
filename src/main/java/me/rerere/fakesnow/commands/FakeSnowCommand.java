@@ -45,6 +45,9 @@ public class FakeSnowCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if(!sender.hasPermission("fakesnow.use")){
+            return null;
+        }
         // commands
         if (args.length == 0) {
             return subCommands.stream().map(SubCommand::getName).collect(Collectors.toList());
