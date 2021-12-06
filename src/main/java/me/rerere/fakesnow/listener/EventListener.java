@@ -6,7 +6,6 @@ import me.rerere.fakesnow.util.Lang;
 import me.rerere.fakesnow.util.VecUtil;
 import me.rerere.fakesnow.util.VersionUtil;
 import org.bukkit.*;
-import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +29,9 @@ public class EventListener implements Listener {
     public void onRespawn(PlayerRespawnEvent event){
         SnowController snowController = FakeSnow.getInstance().getSnowController();
         if(snowController.shouldForceSnow(event.getPlayer(), event.getRespawnLocation())){
-            event.getPlayer().setPlayerWeather(WeatherType.DOWNFALL);
+            Bukkit.getScheduler().runTaskLater(FakeSnow.getInstance(), () -> {
+                event.getPlayer().setPlayerWeather(WeatherType.DOWNFALL);
+            }, 40L);
         }
     }
 

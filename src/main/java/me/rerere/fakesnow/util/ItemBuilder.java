@@ -7,12 +7,11 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ItemBuilder {
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
     // hide constructor
     public ItemBuilder(Material material) {

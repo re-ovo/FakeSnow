@@ -54,7 +54,22 @@ public class SnowController {
         FakeSnow.getInstance().getLogger().info("Loaded " + arenas.size() + " worlds & regions");
     }
 
-    // TODO
+    private int getWorldMinHeight() {
+        if(VersionUtil.getVersion() < 18){
+            return 0;
+        } else {
+            return -64;
+        }
+    }
+
+    private int getWorldMaxHeight() {
+        if(VersionUtil.getVersion() < 18){
+            return 256;
+        } else {
+            return 320;
+        }
+    }
+
     public void handle(BiomeBridge biomeBridge) {
         World world = biomeBridge.getPlayer().getWorld();
         if (isInSnowWorld(world)) {
@@ -68,7 +83,7 @@ public class SnowController {
             } else {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
-                        for (int y = 0; y < 256; y++) {
+                        for (int y = getWorldMinHeight(); y < getWorldMaxHeight(); y++) {
                             biomeBridge.setBiome(x, y, z);
                         }
                     }
@@ -84,7 +99,7 @@ public class SnowController {
             } else {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
-                        for (int y = 0; y < 256; y++) {
+                        for (int y = getWorldMinHeight(); y < getWorldMaxHeight(); y++) {
                             biomeBridge.setBiome(x, y, z);
                         }
                     }

@@ -7,6 +7,8 @@ import me.rerere.fakesnow.nms.versions.v1_15_r1.NMS_V1_15_R1;
 import me.rerere.fakesnow.nms.versions.v1_16_r1.NMS_V1_16_R1;
 import me.rerere.fakesnow.nms.versions.v1_16_r2.NMS_V1_16_R2;
 import me.rerere.fakesnow.nms.versions.v1_16_r3.NMS_V1_16_R3;
+import me.rerere.fakesnow.nms.versions.v1_17_r1.NMS_V1_17_R1;
+import me.rerere.fakesnow.nms.versions.v1_18_r1.NMS_V1_18_R1;
 import me.rerere.fakesnow.nms.versions.v1_8_r3.NMS_V1_8_R3;
 import org.bukkit.Bukkit;
 
@@ -34,6 +36,14 @@ public class NMSManager {
                 break;
             case "v1_16_R3":
                 this.visitor = new NMS_V1_16_R3();
+                break;
+            case "v1_17_R1":
+            case "v1_17_R2":
+            case "v1_17_R3":
+                this.visitor = new NMS_V1_17_R1();
+                break;
+            case "v1_18_R1":
+                this.visitor = new NMS_V1_18_R1();
                 break;
             default:
                 throw new UnknowMinecraftVersionException("Unsupported Minecraft Server Version: " + nms);

@@ -1,5 +1,5 @@
 name: FakeSnow
-version: ${project.version}
+version: @VERSION@
 main: me.rerere.fakesnow.FakeSnow
 api-version: 1.13
 depend: [ ProtocolLib ]
